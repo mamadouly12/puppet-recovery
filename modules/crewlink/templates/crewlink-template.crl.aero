@@ -1,0 +1,117 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/crewlink<%= suffix %>.crl.aero
+	ServerName crewlink<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/crewlink<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	Redirect permanent / https://crewlink<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--crewlink<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--crewlink<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/crewlink<%= suffix %>.crl.aero
+		ServerName crewlink<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/crewlink<%= suffix %>.crl.aero>
+			AllowOverride None
+			Order Deny,Allow
+			Allow from all
+		</Directory>
+		
+		RedirectMatch permanent ^/$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=crewlinkForCrew\&crewlinkOperation=loadMainFrameSet
+		RedirectMatch permanent ^/crewinfo$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=crewlinkForCrew\&crewlinkOperation=loadMainFrameSet
+		RedirectMatch permanent ^/checkin$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=checkIn\&crewlinkOperation=loadMainFrameSet
+		RedirectMatch permanent ^/checkout$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=checkOut\&crewlinkOperation=loadMainFrameSet
+		RedirectMatch permanent ^/admin$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=crewlinkForNonCrew\&crewlinkOperation=loadMainFrameSet
+		RedirectMatch permanent ^/directinput$ https://crewlink.crl.aero/crewlink/clApp?crewlinkService=directInput\&crewlinkOperation=loadMainFrameSet
+		
+		#RedirectMatch permanent ^/$ https://crewlink.crl.aero/crewlink
+		#RedirectMatch permanent ^/$ https://crewlink.crl.aero/crewlink/Crew_client.jsp
+		
+		<Proxy *>
+			Order Deny,Allow
+			Allow from all
+		</Proxy>
+		
+		ProxyRequests Off
+		ProxyPreserveHost On
+		
+		RewriteEngine on
+		RewriteCond %{REQUEST_URI} crewlink/crewlink.jsp$
+		RewriteCond %{QUERY_STRING} .*resetSession=Y.*
+		RewriteRule ^.*$ https://crewlink.crl.aero/sso/logout?ReturnTo=/index.html [L,R=301]
+		RewriteRule ^/crewlink/(.*)$ http://172.18.64.198:9091/crewlink/$1 [P]
+		RewriteRule ^/calendar/(.*)$ http://172.18.64.198:9091/calendar/$1 [P]
+		
+		#ProxyPass /crewlink http://172.18.64.198:9091/crewlink
+		ProxyPassReverse /crewlink http://172.18.64.198:9091/crewlink
+		ProxyPassReverse /calendar http://172.18.64.198:9091/calendar
+		
+		<Location />
+			Require valid-user
+			AuthType "Mellon"
+			MellonEnable "auth"
+			MellonVariable "cookie_crewlink"
+			MellonSessionLength 7200
+			MellonSecureCookie On
+			MellonUser "ucid"
+			MellonDefaultLoginPath  "/"
+			MellonEndpointPath "/sso"
+			MellonSPPrivateKeyFile /etc/apache2/sso-mellon/sites/crewlink<%= suffix %>.crl.aero/https_crewlink_<%= envlong %>.crl.aero.key
+			MellonSPCertFile /etc/apache2/sso-mellon/sites/crewlink<%= suffix %>.crl.aero/https_crewlink_<%= envlong %>.crl.aero.cert
+			MellonSPMetadataFile /etc/apache2/sso-mellon/sites/crewlink<%= suffix %>.crl.aero/https_crewlink_<%= envlong %>.crl.aero.xml
+			MellonIdPMetadataFile /etc/apache2/sso-mellon/idp-data/idp-metadata.xml
+			MellonIdPPublicKeyFile /etc/apache2/sso-mellon/idp-data/idp-cert.pem
+        	</Location>
+
+                <Location /calendar>
+                        AllowOverride None
+                        Order Deny,Allow
+                        Allow from all
+                </Location>
+
+		RequestHeader set sso_remote_user "%{MELLON_trigram}e" env=MELLON_trigram
+		RequestHeader set sso_remote_user "%{MELLON_ucid}e" env=!MELLON_trigram
+		RequestHeader set EXTERNALIP "%{REMOTE_ADDR}s"
+
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--crewlink<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--crewlink<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

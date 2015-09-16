@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+	<Environment name="ACTIVITI_CONFIGURATION_COMMONS" type="java.lang.String" 
+		value="file:///var/epapyrus/conf/ePapyrusActiviti/activiti-commons.properties" />
+	<Environment name="ACTIVITI_CONFIGURATION_ENVSPEC" type="java.lang.String" 
+		value="file:///var/epapyrus/conf/ePapyrusActiviti/production/activiti-production.properties" />
+
+	<Resource name="jdbc/ActivitiDataSource"
+		type="javax.sql.DataSource"
+		auth="Container"
+		username="SPEPAACT01"
+		password="hgUd577X43"
+		driverClassName="org.gjt.mm.mysql.Driver"
+		url="jdbc:mysql://bdd-MPEPAACT01.itcloud.lan:3306/MPEPAACT01?autoReconnect=true"
+		validationQuery="SELECT 1"
+		validationQueryTimeout="2"
+		testOnReturn="false"
+		testOnBorrow="false"
+		maxActive="3"
+		maxIdle="1"
+		maxWait="10000"
+		/>
+
+	<Resource name="jdbc/ReferentialsDataSource"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="SPEPAREF02"
+		password="GFuj83Mw70"
+		driverClassName="org.gjt.mm.mysql.Driver"
+		url="jdbc:mysql://bdd-MPEPAREF02.itcloud.lan:3306/MPEPAREF02?autoReconnect=true"
+		validationQuery="SELECT 1"
+		validationQueryTimeout="2"
+		testOnReturn="false"
+		testOnBorrow="true"
+		maxActive="3"
+		maxIdle="1"
+		maxWait="10000"
+		/>
+
+</Context>

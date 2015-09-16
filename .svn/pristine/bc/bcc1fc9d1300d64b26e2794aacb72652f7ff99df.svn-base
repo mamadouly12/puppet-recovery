@@ -1,0 +1,4 @@
+nameserver 172.18.6.33
+nameserver 172.18.6.36
+domain itcloud.lan
+search itcloud.lan corsairfly.com crl.aero

@@ -1,0 +1,59 @@
+$TTL 604800     ; 1 week
+$ORIGIN fr.corsair.
+@ IN SOA ns1.itcloud.lan. admin.itcloud.lan. (
+                201302281507	; serial
+                3600     		; refresh (1 hour)
+                86400      		; retry (1 day)
+                2419200    		; expire (4 weeks)
+                604800     		; minimum (1 week)
+                )
+
+
+;-----------	
+; DNS
+;-----------
+@						IN NS	ns1.itcloud.lan.
+@						IN NS	ns2.itcloud.lan.
+ns1						IN A	172.18.6.33
+ns2						IN A	172.18.6.36
+
+;----------------
+; ZONE CORSAIR.FR
+;----------------
+
+; WEB
+dev						A		93.187.47.11
+pp						A		93.187.47.12
+www						A		172.18.7.4
+ea						CNAME	corsair-fr.eulerian.net.
+docs					A		172.18.1.35
+jeu						A		172.18.1.35
+
+; MAIL
+smtp					A		172.18.1.30
+@						MX	10	cluster-b.mailcontrol.com.
+@						MX	10	cluster-f.mailcontrol.com.
+@						MX	10	cluster-e.mailcontrol.com.
+@						MX	100	mail.tui.de.
+
+; GOOGLE APPS
+mail					CNAME	ghs.googlehosted.com.
+gapps 					MX 	3 	ALT1.ASPMX.L.GOOGLE.COM.
+gapps 					MX	3	ALT2.ASPMX.L.GOOGLE.COM.
+gapps					MX	1	ASPMX.L.GOOGLE.COM.
+gapps					MX	5	ASPMX2.GOOGLEMAIL.COM.
+gapps					MX	5	ASPMX3.GOOGLEMAIL.COM.
+
+; SCORIES
+caitech					A		10.160.144.8
+gms						A		10.160.142.231
+integra					A		194.250.23.221
+ftp						CNAME	integra.corsair.fr.
+intranet				A		10.160.196.200
+intranetdev				A		10.160.196.200
+intranetnf				A		10.160.11.113
+isacluster				A		10.160.142.14
+isacluster				A		10.160.144.14
+keops					A		10.160.143.3
+picsou					A		10.160.140.5
+vpnssl					A		10.160.141.30

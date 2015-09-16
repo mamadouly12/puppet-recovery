@@ -1,0 +1,113 @@
+$TTL 604800     ; 1 week
+$ORIGIN crl.aero.
+@ IN SOA ns1.itcloud.lan. admin.itcloud.lan. (
+                201303261804	; serial
+                3600     		; refresh (1 hour)
+                86400      		; retry (1 day)
+                2419200    		; expire (4 weeks)
+                604800     		; minimum (1 week)
+                )
+
+
+;-----------	
+; DNS
+;-----------
+@						IN NS	ns1.itcloud.lan.
+@						IN NS	ns2.itcloud.lan.
+ns1						IN A	172.18.6.33
+ns2						IN A	172.18.6.36
+
+;-----------
+; Alias applicatifs
+;-----------
+epapyrus-demo			CNAME	app-epapyrus-demo.itcloud.lan.
+epapyrus-preprod		A       172.18.4.24
+epapyrus				A       172.18.5.24
+
+manzana-demo			CNAME	app-manzana-demo.itcloud.lan.
+manzana-preprod			A       172.18.4.24
+manzana					A       172.18.5.24
+
+; Remarque: L'usage du Full SSO (Kerberos) sur OpenAM impose l'utilisation d'enregistrements A + PTR et non de CNAME
+login-demo				A		172.18.3.33
+login-preprod			A   	172.18.4.24
+login					A		172.18.5.24
+
+go-demo					A		172.18.3.33
+go-preprod				A   	172.18.4.24
+go						A		172.18.5.24
+
+kiosque-demo                    CNAME	SLVDEPAWEB01.itcloud.lan.
+kiosque-preprod                 A	172.18.4.24
+kiosque                         A	172.18.5.24
+
+aw-preprod				CNAME   SWVQGDILDP01.corsairfly.com.
+aw						CNAME	SWVPGDILDP01.corsairfly.com.
+
+
+planning               CNAME   SLVPINFRPX03.itcloud.lan.
+tpe                    CNAME   SLVPINFRPX03.itcloud.lan.
+tperun                    CNAME   SLVPINFRPX03.itcloud.lan.
+mcc                    CNAME   SLVPINFRPX03.itcloud.lan.
+ambition2017                    CNAME   SLVPINFRPX03.itcloud.lan.
+rh          			CNAME   SLVPINFRPX03.itcloud.lan.
+rh-preprod                      CNAME   SLVPINFRPX03.itcloud.lan.
+dsi                             CNAME   SLVPINFRPX03.itcloud.lan.
+dsi-preprod                     CNAME   SLVPINFRPX03.itcloud.lan.
+blog                             CNAME   SLVPINFRPX03.itcloud.lan.
+blog-preprod                     CNAME   SLVPINFRPX03.itcloud.lan.
+gp                              CNAME   SLVPINFRPX03.itcloud.lan.
+redmine                         CNAME   SLVPINFRPX03.itcloud.lan.
+owncloud                        CNAME   SLVPINFRPX03.itcloud.lan.
+l                               CNAME   SLVPINFRPX03.itcloud.lan.
+arp                             CNAME   SLVPINFRPX03.itcloud.lan.
+
+crewlink				A       172.18.5.24
+
+share-demo				CNAME	SLVDEPAWEB01.itcloud.lan.
+share-preprod			A       172.18.4.24
+share					A       172.18.5.24
+
+ebiblio-demo			CNAME	SLVDEPAWEB01.itcloud.lan.
+ebiblio-preprod			A       172.18.4.24
+ebiblio					A       172.18.5.24
+
+records-demo			CNAME	SLVDEPAWEB01.itcloud.lan.
+records-preprod			A       172.18.4.24
+records					A       172.18.5.24
+
+splunk					A       172.18.5.24
+
+supervision				A	172.18.6.34
+
+visual-demo				CNAME   SLVDEPAWEB01.itcloud.lan.
+visual-preprod			A       172.18.4.24
+visual					A       172.18.5.24
+
+colombus			CNAME	SLVPCLBWEB01.itcloud.lan.
+colombus-preprod                CNAME   SLVQCLBWEB01.itcloud.lan.
+colombus-rect			CNAME   SLVQCLBWEB02.itcloud.lan.
+colombus-dev                    CNAME   SLVDCLBWEB01.itcloud.lan.
+scheduler-colombus              CNAME   SLVPCLBTJS01.itcloud.lan.
+scheduler-colombus-preprod      CNAME   SLVQCLBTJS01.itcloud.lan.
+scheduler-colombus-rect		CNAME	SLVQCLBTJS02.itcloud.lan.
+scheduler-colombus-dev          CNAME   SLVDCLBTJS01.itcloud.lan.
+
+
+tjs-dev.colombus	  	CNAME	SLVDCLBTJS01.itcloud.lan.
+tjs-rect.colombus	  	CNAME	SLVQCLBTJS02.itcloud.lan.
+tjs-preprod.colombus	 	CNAME	SLVQCLBTJS01.itcloud.lan.
+tjs-prod.colombus	 	CNAME	SLVPCLBTJS01.itcloud.lan.
+
+db-dev.colombus		 	CNAME	SLVDCLBBDD01.itcloud.lan.
+db-rect.colombus	 	CNAME	SLVQCLBBDD02.itcloud.lan.
+db-preprod.colombus	 	CNAME 	SLVQCLBBDD01.itcloud.lan.
+db-prod.colombus	  	CNAME	SLVPCLBBDD01.itcloud.lan.
+
+web-dev.colombus	 	CNAME	SLVDCLBWEB01.itcloud.lan.
+web-rect.colombus	 	CNAME 	SLVQCLBWEB02.itcloud.lan.
+web-preprod.colombus		CNAME	SLVQCLBWEB01.itcloud.lan.
+web-prod.colombus	 	CNAME	SLVPCLBWEB01.itcloud.lan.
+
+ez-preprod			CNAME	SLVQB2CWEB01.itcloud.lan.
+

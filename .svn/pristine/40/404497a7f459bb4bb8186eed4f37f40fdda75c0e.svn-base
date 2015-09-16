@@ -1,0 +1,67 @@
+$TTL 604800     ; 1 week
+@ IN SOA ns1.itcloud.lan. admin.itcloud.lan. (
+                201212201023	; serial
+                3600     		; refresh (1 hour)
+                86400      		; retry (1 day)
+                2419200    		; expire (4 weeks)
+                604800     		; minimum (1 week)
+                )	
+
+
+;-----------
+; DNS
+;-----------
+		IN NS		ns1.itcloud.lan.
+		IN NS		ns2.itcloud.lan.
+33.6	IN PTR		ns1.itcloud.lan.
+36.6	IN PTR		ns2.itcloud.lan.
+
+
+;-----------
+; Serveurs
+;-----------
+; INFRA
+;35.1	IN PTR		SLVPINFPXY01.itcloud.lan.
+36.6	IN PTR		SLVPINFSYS01.itcloud.lan.
+34.6	IN PTR		SLVPINFSYS02.itcloud.lan.
+33.6	IN PTR		SLVPINFSYS03.itcloud.lan.
+35.6	IN PTR		SLVPINFCNF01.itcloud.lan.
+
+; DEMO
+;33.3	IN PTR		SLVDEPAWEB01.itcloud.lan.
+33.3	IN PTR		login-demo.crl.aero.
+37.3	IN PTR		SLVDEPAWEB02.itcloud.lan.
+38.3	IN PTR		SLVDEPAWEB03.itcloud.lan.
+34.3	IN PTR		SLVDINFBDD01.itcloud.lan.
+35.3	IN PTR		SWVDGDILDP01.itcloud.lan.
+20.3	IN PTR		SLVDB2CWEB01.itcloud.lan.
+
+; PREPROD
+;33.4	IN PTR		SLVQEPAWEB01.itcloud.lan.
+33.4	IN PTR		login-preprod.crl.aero.
+37.4	IN PTR		SLVQEPAWEB02.itcloud.lan.
+38.4	IN PTR		SLVQEPAWEB03.itcloud.lan.
+34.4	IN PTR		SLVQINFBDD01.itcloud.lan.
+33.1	IN PTR		SLVQINFRPX01.itcloud.lan.
+35.4	IN PTR		SWVQGDILDP01.itcloud.lan.
+20.4	IN PTR		SLVQB2CWEB01.itcloud.lan.
+
+; PROD
+;33.5	IN PTR		SLVPEPAWEB01.itcloud.lan.
+33.5	IN PTR		login.crl.aero.
+37.5	IN PTR		SLVPEPAWEB02.itcloud.lan.
+38.5	IN PTR		SLVPEPAWEB03.itcloud.lan.
+34.5	IN PTR		SLVPINFBDD01.itcloud.lan.
+34.1	IN PTR		SLVPINFRPX01.itcloud.lan.
+35.5	IN PTR		SWVPGDILDP01.itcloud.lan.
+20.1	IN PTR		SLVPB2CWEB01.itcloud.lan.
+21.1	IN PTR		SLVPB2CWEB02.itcloud.lan.
+22.1	IN PTR		SLVPB2CNFS01.itcloud.lan.
+20.5	IN PTR		SLVPB2CBDD01.itcloud.lan.
+21.5	IN PTR		SLVPB2CBDD02.itcloud.lan.
+41.1	IN PTR		SLVPB2CRPX01.itcloud.lan.
+42.1	IN PTR		SLVPB2CRPX02.itcloud.lan.
+5.1		IN PTR		RDVPB2CLBA01.itcloud.lan.
+4.7		IN PTR		RDVPB2CLBA02.itcloud.lan.
+43.5	IN PTR		SLVPINTBLG01.itcloud.lan.
+35.1	IN PTR		SLVPINFRPX03.itcloud.lan.

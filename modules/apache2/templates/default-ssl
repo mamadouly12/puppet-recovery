@@ -1,0 +1,34 @@
+<VirtualHost *:443>
+	DocumentRoot /var/www/default
+	ServerName <%= ipaddress %>
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/default>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--default.log
+	CustomLog /var/log/apache2/access--default.log combined
+
+	SSLEngine on
+	SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	SSLProtocol -all +SSLv3 +TLSv1
+	SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+	SSLHonorCipherOrder on
+	SSLStrictSNIVHostCheck off
+
+	BrowserMatch "MSIE [2-6]" \
+	nokeepalive ssl-unclean-shutdown \
+	downgrade-1.0 force-response-1.0
+	BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+</VirtualHost>

@@ -1,0 +1,27 @@
+<EntityDescriptor entityID="https://manzana.crl.aero" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIICsjCCAZoCCQDmpF+KMQrNHDANBgkqhkiG9w0BAQUFADAbMRkwFwYDVQQDExBt
+YW56YW5hLmNybC5hZXJvMB4XDTEzMDIwMTEzMTA1OFoXDTIzMDIwMTEzMTA1OFow
+GzEZMBcGA1UEAxMQbWFuemFuYS5jcmwuYWVybzCCASIwDQYJKoZIhvcNAQEBBQAD
+ggEPADCCAQoCggEBAN5MfVzPZ91GEtOLUju6OEg4nWtuMsXrOvD8McDkBa0Fvd5H
+EW/HLavI96FFd/6ZvM9hKOpi4TMKvn7A4fT/nKQX5R1YgK+YywO6rUoSttcISq1b
+4EINPwYYUzfbD/Akw/bChSxiRO2E+lBVz+Hhoc0xqXPM1lbl478m7rvnoxr90T8H
+AI3tT5t7X+X0pk0YT1iSTNt/Iroh/QjpixNLuK316xAW/jPxNmyQI20ZLBIgRQC+
+dNjYG0A1fFyAhZgMEyn49YBRhu9UPc30pTvZMC/SGLjtBWBNNE8mI+YD6xsmoKP2
+Gj13o1/DAjKz2IjDu2ar/RSLskJVWXIkM7YFwxcCAwEAATANBgkqhkiG9w0BAQUF
+AAOCAQEAPB8Ixxig3XfX//ea7a/cn2piiUmg/OTe2xy3AdxgEOZEleo80WGbUipF
+K3P++m7BH13s7pFTJsQ0I6LPoEiMUp9G/PbLVWI708uVwWpBue78/R5zBAjsm93W
+c35RNjlw78wRN0kLrgGS50MF7iqsrmfI8IC13p1cjnN48DAYO4v9jpXMo+H3/9ck
+fullW+effJgNLmDnA1HGto/yHRui3G8ieGE4OnnZYWomLr7RP+GumVLfSvwCYpLR
+/TM7zFpLm80/ryWN6Sp1gtpNwPRaqGdiZqH8NWd9ouMO3M7eU3ybT9AnYD+wI1Oq
+hEsuivoFRNKNW4auLEja46SOwz3gdw==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://manzana.crl.aero/sso/logout"/>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://manzana.crl.aero/sso/postResponse" index="0"/>
+  </SPSSODescriptor>
+</EntityDescriptor>

@@ -1,0 +1,30 @@
+$TTL 604800     ; 1 week
+@ IN SOA ns1.itcloud.lan. admin.itcloud.lan. (
+                201209041700	; serial
+                3600     		; refresh (1 hour)
+                86400      		; retry (1 day)
+                2419200    		; expire (4 weeks)
+                604800     		; minimum (1 week)
+                )	
+
+
+;-----------
+; DNS
+;-----------
+		IN NS		ns1.itcloud.lan.
+		IN NS		ns2.itcloud.lan.		
+
+
+;-----------
+; Serveurs
+;-----------
+; INFRA
+
+
+; DEMO
+
+
+; PREPROD
+
+
+; PROD

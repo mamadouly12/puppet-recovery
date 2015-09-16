@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- HTML5 Mobile Boilerplate -->
+<!--[if IEMobile 7]><html class="no-js iem7"><![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+
+<!-- Ne pas faire HAUT, HAUT, BAS, BAS, GAUCHE, DROITE, GAUCHE, DROITE, B, A -->
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Ecosystème Corsair</title>
+	<meta name="description" content="Page de rebond de Corsair">
+	<meta name="keywords" content="corsair, SI, cool stuff, lolcatz">
+	<meta name="author" content="CSI">
+	<meta name="robots" content="noindex,follow" />
+	<!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+	<link rel="stylesheet" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" href="css/responsivegridsystem.css" media="all">
+	<link rel="stylesheet" href="css/col.css" media="all">
+	<link rel="stylesheet" href="css/2cols.css" media="all">
+	<link rel="stylesheet" href="css/3cols.css" media="all">
+	<link rel="stylesheet" href="css/4cols.css" media="all">
+	<link rel="stylesheet" href="css/5cols.css" media="all">
+	<link rel="stylesheet" href="css/6cols.css" media="all">
+	<link rel="stylesheet" href="css/7cols.css" media="all">
+	<link rel="stylesheet" href="css/8cols.css" media="all">
+	<link rel="stylesheet" href="css/9cols.css" media="all">
+	<link rel="stylesheet" href="css/10cols.css" media="all">
+	<link rel="stylesheet" href="css/11cols.css" media="all">
+	<link rel="stylesheet" href="css/12cols.css" media="all">
+	<link rel="stylesheet" href="css/corsair.css" media="all">
+	<link rel="stylesheet" href="css/hs.css" media="all">
+	<script src="js/modernizr-2.5.3-min.js"></script>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="headcontainer">
+		<header>
+		<img src="img/logo-320x125.png" alt="logo" />
+		<p class="subintro">Bonjour <!--#if expr='"$MELLON_firstname" != ""' --><span class="name"><!--#echo var="MELLON_firstname" --></span><!--#endif --> ! Choisissez ci-dessous une application du Système d'Information de Corsair</p>
+		</header>
+	</div>
+	<div id="maincontentcontainer">
+		<div id="maincontent">
+			<div class="section group">
+				<div class="col span_1_of_1" id="sso">
+					<h4>Identification unique disponible</h4>
+				</div>
+			</div>
+			<div class="section group">
+				<div class="col span_1_of_6" id="manzana">
+					<a href="https://manzana.crl.aero/"><img src="img/icon-manzana.png" alt="Manzana est l'application Pages Blanches de Corsair" />
+					<p>Manzana</p></a>
+				</div>
+                                <div class="col span_1_of_6" id="visual">
+                                        <a href="https://visual.crl.aero/"><img src="img/icon-visual.png" alt="Pour consulter le programme de vols de Corsair" />
+                                        <p>Visual</p></a>
+                                </div>
+				<div class="col span_1_of_6" id="crewlink">
+					<a href="https://crewlink.crl.aero/"><img src="img/icon-crewlink.png" alt="Visualisez vos planning via CrewLink" />
+					<p>CrewLink</p></a>
+				</div>
+                                <div class="col span_1_of_6" id="ebiblio">
+                                        <a href="https://share.crl.aero/share/page/repository"><img src="img/icon-ebiblio.png" alt="La bibliothèque de référence" />
+                                        <p>eBiblio</p></a>
+                                </div>
+				<div class="col span_1_of_6" id="share">
+					<a href="https://share.crl.aero/share/"><img src="img/icon-share.png" alt="ePapyrus Share vous permet de travailler de façon collaborative" />
+					<p>Share</p></a>
+				</div>
+                                <div class="col span_1_of_6" id="records">
+                                        <a href="https://records.crl.aero/"><img src="img/icon-records.png" alt="Records liste tous les enregistrements" />
+                                        <p>Records</p></a>
+                                </div>
+			</div>
+			<div class="section group">
+                                <div class="col span_1_of_6" id="epapyruscm">
+                                        <a href="https://epapyrus.corsairfly.com/activiti/activiti"><img src="img/icon-epapyruscm.png" alt="ePapyrus CM" />
+                                        <p>ePapyrus CM</p></a>
+                                </div>
+                                <div class="col span_1_of_6" id="salesforce">
+                                        <a href="https://login.crl.aero/salesforce"><img src="img/icon-salesforce.png" alt="SalesForce est l'outil de CRM choisi Par Corsair" />
+                                        <p>Salesforce</p></a>
+                                </div>
+                                <div class="col span_1_of_6" id="intranet">
+                                        <a href="https://intranet.corsairfly.com/"><img src="img/icon-intranet.png" alt="Retrouvez tout sur l'Intranet!" />
+                                        <p>Intranet</p></a>
+                                </div>
+                                <div class="col span_1_of_6" id="blog">
+                                        <a href="http://www.corsairblog.com/"><img src="img/icon-blog.png" alt="Le blog d'entreprise de Corsair" />
+                                        <p>Blog Corsair</p></a>
+                                </div>
+                                <div class="col span_1_of_6" id="email">
+                                        <a href="https://mailbox.tui.com/"><img src="img/icon-email.png" alt="Accèdez à vos emails depuis votre navigateur" />
+                                        <p>Webmail</p></a>
+                                </div>
+<!--
+                                <div class="col span_1_of_6" id="dsi">
+                                        <a href="http://dsi.crl.aero/"><img src="img/icon-dsi.png" alt="L'espace de communication de la DSI" />
+                                        <p>Blog DSI</p></a>
+                                </div>
+				<div class="col span_1_of_6" id="splunk">
+					<a href="https://splunk.crl.aero/"><img src="img/icon-splunk.png" alt="Splunk Splunk Splunk!" />
+					<p>Splunk</p></a>
+				</div>						
+-->
+			</div>			
+			<div class="section group">
+				<div class="col span_1_of_1" id="other">
+					<h4>Autres applications du Système d'Information</h4>
+				</div>
+			</div>			
+			<div class="section group">
+				<div class="col span_1_of_6" id="airshop">
+					<a href="http://www.staffcrl.com"><img src="img/icon-airshop.png" alt="Achetez des parfums et accessoires à prix discount" />
+					<p>Airshop</p></a>
+				</div>			
+				<div class="col span_1_of_6" id="notilus">
+					<a href="http://s31.mynotilus.com/corsairfly/"><img src="img/icon-notilus.png" alt="L'application affreuse pour gérer ses notes de frais" />
+					<p>Notilus</p></a>
+				</div>
+				<div class="col span_1_of_6" id="myid">
+					<a href="https://gp.crl.aero"><img src="img/icon-myid.png" alt="Réservez vos GP avec MyID Travel" />
+					<p>MyID Travel</p></a>
+				</div>		
+				<div class="col span_1_of_6" id="colombus">
+					<a href="http://colombus.corsairfly.com/colombus/"><img src="img/icon-colombus.png" alt="Colombus l'outil de référence BI de Corsair" />
+					<p>Colombus</p></a>
+				</div>
+                                <div class="col span_1_of_6" id="arp">
+                                        <a href="https://arp.crl.aero/"><img src="img/icon-amadeus.png" alt="Amadeus Retailing Platform"/>
+                                        <p>Retailing Platform</p></a>
+                                </div>
+			</div>		
+		</div>
+	</div>
+	<div id="footercontainer">
+		<footer class="group">
+			<div class="col span_1_of_2 left" id="footernote">
+			<h4>Une page de rebond proposée par la DSI de Corsair</h4>
+			</div>
+			<div class="col span_1_of_2 right" id="logout">
+			<a class="logout" href="https://login.crl.aero/opensso/UI/Logout">Déconnexion</a>
+			</div>			
+		</footer>
+	</div>
+</div>
+	<script src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/responsivegridsystem.js"></script>
+	<script src="js/hs-min.js"></script>
+	<script src="js/easter.js"></script>
+	<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-37058816-6', 'crl.aero');
+	ga('set', 'dimension1', '<!--#echo var="MELLON_ucid" -->');
+	ga('send', 'pageview');
+
+
+	$(function() {
+		$("a").on('click',function(e){
+			var url = $(this).attr("href");
+			if (e.currentTarget.host != window.location.host) {
+				ga('send', 'event', 'link', 'click', url);
+				if (e.metaKey || e.ctrlKey) {
+					var newtab = true;
+				}
+				if (!newtab) {
+					e.preventDefault();
+					setTimeout('document.location = "' + url + '"', 100);
+				}
+			}
+		});
+	});
+	</script>
+</body>
+</html>

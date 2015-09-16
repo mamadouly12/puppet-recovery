@@ -1,0 +1,93 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/manzana<%= suffix %>.crl.aero
+	ServerName manzana<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/manzana<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+	
+	Redirect permanent / https://manzana<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--manzana<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--manzana<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/manzana<%= suffix %>.crl.aero
+		ServerName manzana<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/manzana<%= suffix %>.crl.aero>
+			AllowOverride None
+			Order Deny,Allow
+			Allow from all
+		</Directory>
+		
+		RedirectMatch permanent ^/$ https://manzana<%= suffix %>.crl.aero/manzana/application
+		
+		<Proxy *>
+			Order Deny,Allow
+			Allow from all
+		</Proxy>
+		
+		ProxyRequests Off
+		ProxyPreserveHost On
+		ProxyPassInterpolateEnv On
+		
+		ProxyPass /manzana http://app-t<%= env %>gdimza01:8040/manzana
+		ProxyPassReverse /manzana http://app-t<%= env %>gdimza01:8040/manzana
+
+		<Location />
+			AuthType "Mellon"
+			MellonEnable "info"
+			MellonVariable "cookie_manzana"
+			MellonSessionLength 10
+			MellonSecureCookie On
+			MellonUser "ucid"
+			MellonDefaultLoginPath  "/manzana/application"
+			MellonEndpointPath "/sso"
+			MellonSPPrivateKeyFile /etc/apache2/sso-mellon/sites/manzana<%= suffix %>.crl.aero/https_manzana_<%= envlong %>.crl.aero.key
+			MellonSPCertFile /etc/apache2/sso-mellon/sites/manzana<%= suffix %>.crl.aero/https_manzana_<%= envlong %>.crl.aero.cert
+			MellonSPMetadataFile /etc/apache2/sso-mellon/sites/manzana<%= suffix %>.crl.aero/https_manzana_<%= envlong %>.crl.aero.xml
+			MellonIdPMetadataFile /etc/apache2/sso-mellon/idp-data/idp-metadata.xml
+			MellonIdPPublicKeyFile /etc/apache2/sso-mellon/idp-data/idp-cert.pem
+        </Location>
+
+        RequestHeader set sso_ucid %{MELLON_ucid}e
+
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--manzana<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--manzana<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

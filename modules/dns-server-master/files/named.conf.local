@@ -1,0 +1,76 @@
+// -----------
+// FORWARD ZONES
+//-----------
+// Zone technique pour les serveurs
+zone "itcloud.lan" {
+        type master;
+        file "/etc/bind/db.itcloud.lan";
+        allow-transfer { 172.18.6.36; };
+};
+
+// Zone de nommage interne du SI connue des utilisateurs
+zone "crl.aero" {
+        type master;
+        file "/etc/bind/db.crl.aero";
+        allow-transfer { 172.18.6.36; };
+};
+
+// Zone historique utilisée par le domaine windows.
+// Attention split DNS avec le public
+zone "corsairfly.com" {
+        type slave;
+        file "/var/cache/bind/db.corsairfly.com";
+        masters { 10.160.252.32; 10.160.252.33; };
+};
+
+// Zone historique utilisée par le domaine windows.
+// Attention split DNS avec le public
+zone "corsair.fr" {
+        type forward;
+        forward only;
+        forwarders { 10.160.252.57; 10.160.252.58; };
+};
+
+// Zone historique utilisée par le domaine windows.
+zone "siege.corsair.fr" {
+        type forward;
+        forward only;
+        forwarders { 10.160.252.57; 10.160.252.58; };
+};
+
+// Zone historique utilisée par le domaine windows.
+zone "technique.corsair.fr" {
+        type forward;
+        forward only;
+        forwarders { 10.160.252.57; 10.160.252.58; };
+};
+
+// Domaine windows de test
+zone "epapyrus-demo.com" {
+        type forward;
+        forward only;
+        forwarders { 172.18.3.35; };
+};
+
+// Zone du nouveau domaine AD de Corsair
+zone "tuids.net" {
+        type forward;
+        forward only;
+        forwarders { 10.160.252.110; 10.160.252.112; };
+};
+
+
+//-----------
+// REVERSE ZONES
+//-----------
+zone "18.172.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.172.18";
+        allow-transfer { 172.18.6.36; };
+};
+
+zone "160.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.10.160";
+        allow-transfer { 172.18.6.36; };
+};

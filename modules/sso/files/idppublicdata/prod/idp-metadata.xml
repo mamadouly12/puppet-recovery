@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityDescriptor entityID="https://login.crl.aero:443/opensso" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+    <IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIE4jCCA8qgAwIBAgIQGcXTKCVgg480YffxObys6jANBgkqhkiG9w0BAQUFADBBMQswCQYDVQQG
+EwJGUjESMBAGA1UEChMJR0FOREkgU0FTMR4wHAYDVQQDExVHYW5kaSBTdGFuZGFyZCBTU0wgQ0Ew
+HhcNMTIxMjA0MDAwMDAwWhcNMTMxMjA0MjM1OTU5WjBZMSEwHwYDVQQLExhEb21haW4gQ29udHJv
+bCBWYWxpZGF0ZWQxGzAZBgNVBAsTEkdhbmRpIFN0YW5kYXJkIFNTTDEXMBUGA1UEAxMObG9naW4u
+Y3JsLmFlcm8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC7A9fENCQ+xwhi6oQfJPkV
+48/dr8Dr/amdmeszrURInu0fdATtgkg4mR/pSIEUzi0VmW6t2EJsB5/BjwoC3dXRq4m6luu9gpkr
+kd25i4TRPQkAjobGoFCzbZ1Dsz/FxBNxhuhuRy0EHxsm0VFpanES8xLLPgJRonRxCyuqLMmnnt0I
+Y9yisv5C6GX3XebkVMPJ55/ME+XdKEl42ItkY5Xy+b6CNeIS9CdF/BRyxmEYbg6Wbwv2UUJOI36j
+NOvNIFti3baXqswaqMHgAYo1OnoQELlEx+UWDaRoD+5dOmpS0Y/J5JmbqLVKz+zfPVAxUcIGxy/X
+LJouuoK2MqTBjSxRAgMBAAGjggG8MIIBuDAfBgNVHSMEGDAWgBS2qP+iqC/Qps1LsWjz51AQMad5
+ITAdBgNVHQ4EFgQUvyuA6PRzeL8BSv6uK0+V5StVvTgwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB
+/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMGAGA1UdIARZMFcwSwYLKwYBBAGy
+MQECAhowPDA6BggrBgEFBQcCARYuaHR0cDovL3d3dy5nYW5kaS5uZXQvY29udHJhY3RzL2ZyL3Nz
+bC9jcHMvcGRmLzAIBgZngQwBAgEwPAYDVR0fBDUwMzAxoC+gLYYraHR0cDovL2NybC5nYW5kaS5u
+ZXQvR2FuZGlTdGFuZGFyZFNTTENBLmNybDBqBggrBgEFBQcBAQReMFwwNwYIKwYBBQUHMAKGK2h0
+dHA6Ly9jcnQuZ2FuZGkubmV0L0dhbmRpU3RhbmRhcmRTU0xDQS5jcnQwIQYIKwYBBQUHMAGGFWh0
+dHA6Ly9vY3NwLmdhbmRpLm5ldDAtBgNVHREEJjAkgg5sb2dpbi5jcmwuYWVyb4ISd3d3LmxvZ2lu
+LmNybC5hZXJvMA0GCSqGSIb3DQEBBQUAA4IBAQAHa7uE2ogJ50ud9lo7pnWkav8korOkGmAKuaMG
+B4xnRRQOvZApQCTf224cLLgdHjgFgy0iLJUS0eJvFd2s9782hAIxFaL0JtWrgGlRWRZnRb3nHT3E
+5ZE+bm6S7Ok/sEZUerEWql7hSRImCMN2lKNCzQ0LRTmWA5cgQX4JE7/nM3fzQd5vbZkowJOwvQkx
+53x5hQrrj89P5WRtjFG7NDSWjEW3BNSjJocZKcSvWEZC2ehnnfqexlC2EKiwslu64WbthO5tot2T
+HmOY+LXAIqBPHzz7TAtI6s2SRk9lz+deC5sxEuvDldmE+lQOaBTjOjFzVHziY7IFH7n1L5M7MLVS
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+       <ArtifactResolutionService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/ArtifactResolver/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.crl.aero:443/opensso/IDPSloRedirect/metaAlias/idp" ResponseLocation="https://login.crl.aero:443/opensso/IDPSloRedirect/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login.crl.aero:443/opensso/IDPSloPOST/metaAlias/idp" ResponseLocation="https://login.crl.aero:443/opensso/IDPSloPOST/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/IDPSloSoap/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.crl.aero:443/opensso/IDPMniRedirect/metaAlias/idp" ResponseLocation="https://login.crl.aero:443/opensso/IDPMniRedirect/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login.crl.aero:443/opensso/IDPMniPOST/metaAlias/idp" ResponseLocation="https://login.crl.aero:443/opensso/IDPMniPOST/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/IDPMniSoap/metaAlias/idp"/>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.crl.aero:443/opensso/SSORedirect/metaAlias/idp"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login.crl.aero:443/opensso/SSOPOST/metaAlias/idp"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/SSOSoap/metaAlias/idp"/>
+        <NameIDMappingService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/NIMSoap/metaAlias/idp"/>
+        <AssertionIDRequestService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login.crl.aero:443/opensso/AIDReqSoap/IDPRole/metaAlias/idp"/>
+        <AssertionIDRequestService Binding="urn:oasis:names:tc:SAML:2.0:bindings:URI" Location="https://login.crl.aero:443/opensso/AIDReqUri/IDPRole/metaAlias/idp"/>
+    </IDPSSODescriptor>
+</EntityDescriptor>

@@ -1,0 +1,21 @@
+<VirtualHost *:80>
+	DocumentRoot /var/www/demosite<%= suffix %>.crl.aero
+	ServerName demosite<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/demosite<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Allow,Deny
+		Allow from all
+	</Directory>
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--demosite<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--demosite<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>

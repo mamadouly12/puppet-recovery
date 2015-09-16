@@ -1,0 +1,76 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/login<%= suffix %>.crl.aero
+	ServerName login<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/login<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+	
+	Redirect permanent / https://login<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--login<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--login<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/login<%= suffix %>.crl.aero
+		ServerName login<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/login<%= suffix %>.crl.aero>
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+		
+		RedirectMatch permanent ^/$ https://login<%= suffix %>.crl.aero/opensso/
+		
+		<Proxy *>
+			Order Deny,Allow
+			Allow from all
+		</Proxy>
+		
+		ProxyRequests Off
+		ProxyPreserveHost On
+	
+		ProxyPass /opensso http://app-t<%= env %>gdisso01.itcloud.lan:8050/opensso
+		ProxyPassReverse /opensso http://app-t<%= env %>gdisso01.itcloud.lan:8050/opensso
+		
+		Redirect permanent /salesforce https://login<%= suffix %>.crl.aero/opensso/idpssoinit?NameIDFormat=urn:oasis:names:tc:SAML:2.0:nameid-format:transient&metaAlias=/idp&spEntityID=https://saml.salesforce.com&binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+		
+		LogLevel info
+		ErrorLog /var/log/apache2/error--login<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--login<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

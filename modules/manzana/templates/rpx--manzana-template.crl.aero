@@ -1,0 +1,74 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/default
+	ServerName manzana<%= suffix %>.crl.aero
+	
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+	
+	<Directory /var/www/default>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+	
+	Redirect permanent / https://manzana<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--manzana<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--manzana<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/default
+		ServerName manzana<%= suffix %>.crl.aero
+			
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+        
+        <Directory /var/www/default>
+            AllowOverride None
+            Order Deny,Allow
+            Deny from all
+        </Directory>
+
+		SSLProxyEngine on
+		ProxyRequests Off
+		ProxyPreserveHost On
+
+		<Proxy *>
+			Order allow,deny
+			Allow from all
+		</Proxy>
+
+		ProxyPassMatch ^/manzana/account.* !
+		ProxyPass / https://manzana<%= suffix %>.crl.aero/
+		ProxyPassReverse / https://manzana<%= suffix %>.crl.aero/
+		
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--manzana<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--manzana<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+	</VirtualHost>
+</IfModule>

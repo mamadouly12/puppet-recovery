@@ -1,0 +1,201 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/visual<%= suffix %>.crl.aero
+	ServerName visual<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/visual<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	Redirect permanent / https://visual<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--visual<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--visual<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/visual<%= suffix %>.crl.aero
+		ServerName visual<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/visual<%= suffix %>.crl.aero>
+			AllowOverride None
+			Order Deny,Allow
+			Allow from all
+		</Directory>
+		
+		<Proxy *>
+			Order Deny,Allow
+			Allow from all
+		</Proxy>
+		
+		RedirectMatch permanent ^/$ https://visual-preprod.crl.aero/index.html
+
+		RequestHeader set X-Visual-Remote-User %{MELLON_ucid}e env=MELLON_ucid
+		Header set X-User-FirstName %{MELLON_firstname}e
+		
+		ProxyRequests Off
+		ProxyPreserveHost On
+		ProxyPassInterpolateEnv On
+		
+		ProxyPass /referentials http://app-t<%= env %>eparef01.itcloud.lan:8020/referentials
+		ProxyPassReverse /referentials http://app-t<%= env %>eparef01.itcloud.lan:8020/referentials
+
+		<Location />
+			AuthType "Mellon"
+			MellonEnable "auth"
+			MellonVariable "cookie_visual"
+			MellonSessionLength 7200
+			MellonSecureCookie On
+			MellonUser "ucid"
+			MellonDefaultLoginPath  "/"
+			MellonEndpointPath "/sso"
+			MellonSPPrivateKeyFile /etc/apache2/sso-mellon/sites/visual<%= suffix %>.crl.aero/https_visual_<%= envlong %>.crl.aero.key
+			MellonSPCertFile /etc/apache2/sso-mellon/sites/visual<%= suffix %>.crl.aero/https_visual_<%= envlong %>.crl.aero.cert
+			MellonSPMetadataFile /etc/apache2/sso-mellon/sites/visual<%= suffix %>.crl.aero/https_visual_<%= envlong %>.crl.aero.xml
+			MellonIdPMetadataFile /etc/apache2/sso-mellon/idp-data/idp-metadata.xml
+			MellonIdPPublicKeyFile /etc/apache2/sso-mellon/idp-data/idp-cert.pem
+			
+			AuthzLDAPAuthoritative off
+			AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			AuthLDAPBindPassword "nVpSaTT312"
+			AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			Require ldap-group CN=glqvis.basicreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		</Location>
+
+
+		<Location /admin.html>
+			AuthzLDAPAuthoritative off
+			AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			AuthLDAPBindPassword "nVpSaTT312"
+			AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			Require ldap-group CN=glqvis.admin,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		</Location>
+
+		<Location /referentials/rest/netline/admin>
+			AuthzLDAPAuthoritative off
+			AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			AuthLDAPBindPassword "nVpSaTT312"
+			AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			Require ldap-group CN=glqvis.admin,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		</Location>
+		
+		#<Location /referentials/rest/netline/crew>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+		
+		#<Location /referentials/rest/netline/crewpnc>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.crewreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		#<Location /referentials/rest/netline/crewpnt>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.crewreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.cockpitreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+		
+		#<Location /referentials/rest/netline/noncrewmembers>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.crewreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.cockpitreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		#<Location /referentials/rest/netline/pax>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.paxreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		#<Location /referentials/rest/netline/freight>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.paxreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+		
+		#<Location /referentials/rest/netline/legtimes>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.cockpitreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		#<Location /referentials/rest/netline/deadhead>
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.crewreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		#<Location ~ "/referentials/rest/netline/(contacts|airportcontacts)">
+			#AuthzLDAPAuthoritative off
+			#AuthLDAPBindDN "CN=sqvisvis01,OU=serviceaccounts,OU=technical,O=manzana-preprod"
+			#AuthLDAPBindPassword "nVpSaTT312"
+			#AuthLDAPURL "ldap://ldp-gdimza-preprod.itcloud.lan:33389/OU=people,o=manzana-preprod?cn?sub?(|(objectClass=userProxyFull)(objectClass=inetOrgPerson))"
+			#Require ldap-group CN=glqvis.paxreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.crewreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.cockpitreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+			#Require ldap-group CN=glqvis.fullreaders,OU=visual-preprod,OU=visual,OU=applications,OU=groups,O=manzana-preprod
+		#</Location>
+
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--visual<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--visual<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile /etc/ssl/certs/STAR.crl.aero.crt
+		SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+		SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

@@ -1,0 +1,56 @@
+# Some resources used to help setting up this config :
+# http://islandlinux.org/howto/installing-secure-ldap-openldap-ssl-ubuntu-using-self-signed-certificate
+# http://eldapo.blogspot.com/2007/08/openldap-as-pass-through-proxy.html
+
+# Force SLAPD to use an old-school config file in /etc/default/slapd
+# SLAPD_CONF=/etc/ldap/slapd.conf
+
+include         /etc/ldap/schema/core.schema
+include         /etc/ldap/schema/cosine.schema
+include         /etc/ldap/schema/inetorgperson.schema
+include         /etc/ldap/schema/nis.schema
+
+pidfile         /var/run/slapd/slapd.pid
+argsfile        /var/run/slapd/slapd.args
+
+modulepath      /usr/lib/ldap
+moduleload      back_ldap
+
+loglevel 256
+monitoring on
+
+defaultsearchbase "dc=corsairfly,dc=com"
+
+access to dn.base="" by * read
+access to dn.base="cn=Subschema" by * read
+access to *
+ by self write
+ by users read
+ by anonymous auth
+
+######################################################
+# database definitions
+######################################################
+
+#database ldap
+#suffix  "dc=corsairfly,dc=com"
+#uri  "ldap://dcflysrv01.corsairfly.com"
+#acl-bind bindmethod=simple binddn="CN=SPGDITKO01,OU=TAKEOFFBLOG,OU=Comptes Applicatifs,OU=AD Corsair,DC=corsairfly,DC=com" credentials="itko01itko01"
+
+database ldap
+suffix "o=manzana"
+uri "ldap://ldp-gdimza.itcloud.lan:33389"
+acl-bind bindmethod=simple binddn="CN=spgdirpx01,OU=serviceaccounts,OU=technical,O=manzana" credentials="ppnDuQLLb7"
+
+#Don't forget the following !
+# sudo apt-get install gnutls-bin
+TLSCipherSuite SECURE256:!AES-128-CBC:!ARCFOUR-128:!CAMELLIA-128-CBC:!3DES-CBC:!CAMELLIA-128-CBC
+
+# Generate the self-signed certificate in /etc/ldap/ssl (create the last folder)
+# sudo openssl req -newkey rsa:2048 -x509 -nodes -out rpx-ldap.pem -keyout rpx-ldap.pem -days 3650
+
+TLSCACertificateFile /etc/ldap/ssl/rpx-ldap.pem
+TLSCertificateFile /etc/ldap/ssl/rpx-ldap.pem
+TLSCertificateKeyFile /etc/ldap/ssl/rpx-ldap.pem
+
+# Check it works : openssl s_client -connect 10.178.3.33:636 -showcerts

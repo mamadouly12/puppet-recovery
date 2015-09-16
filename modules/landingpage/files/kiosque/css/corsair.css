@@ -1,0 +1,72 @@
+p.subintro {
+	font-weight: normal;
+	font-size: 14px;
+}
+
+header {
+	padding: 10px 0px 10px 0px;
+}
+
+footer {
+	padding: 0px;
+}
+
+#footercontainer {
+	background: #11306F;
+}
+
+footer h4 {
+	font-size: 12px;
+	color: #FFFFFF;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+a,a:visited {
+	color: #000000;;
+}
+
+a:hover {
+	color: #FFFFFF;
+}
+
+a . logout {
+	text-align: right;
+}
+
+.logout a,.logout a:visited {
+	color: #FFFFFF;;
+}
+
+a .logout:hover {
+	color: #FFFFFF;
+}
+
+.span_1_of_6:hover
+{
+	background: #13B3DE;
+}
+
+.name {
+	font-weight: bold;
+	color: #97BF0D;
+	font-size: 1.2em;
+}
+
+@media only screen and (max-width: 400px) {
+
+	p.subintro {
+		font-size: 10px;
+	}
+	
+	footer h4 {
+		font-size: 50%;
+	}
+
+}

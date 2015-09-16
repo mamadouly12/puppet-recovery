@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityDescriptor entityID="https://login-preprod.crl.aero:443/opensso" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+    <IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIGXTCCBUWgAwIBAgIDCEb9MA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJJTDEWMBQGA1UE
+ChMNU3RhcnRDb20gTHRkLjErMCkGA1UECxMiU2VjdXJlIERpZ2l0YWwgQ2VydGlmaWNhdGUgU2ln
+bmluZzE4MDYGA1UEAxMvU3RhcnRDb20gQ2xhc3MgMSBQcmltYXJ5IEludGVybWVkaWF0ZSBTZXJ2
+ZXIgQ0EwHhcNMTIxMjA0MDkwOTAxWhcNMTMxMjA1MTc1MjA0WjBsMRkwFwYDVQQNExAxeDJRQnRk
+MDdsSW50empIMQswCQYDVQQGEwJGUjEfMB0GA1UEAxMWbG9naW4tcHJlcHJvZC5jcmwuYWVybzEh
+MB8GCSqGSIb3DQEJARYSd2VibWFzdGVyQGNybC5hZXJvMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+MIIBCgKCAQEA1cKCNnVRxQl6Jyhm1phuz7OUJS8y8JpNrygYfy4VtrUcdbZsS/ZLGYd6wsfsJ6ot
+23XSBrgzeqnnwXjHJ+t5yX80MN3KeOorPZjVEsnHj5WAtNUrH2mq3U//onl9Gg+JHIMQaRAsx11K
+XF+yg6BNdImzMFUUwXel0yPQVK2XZxt4uU/QvBIrYJMKuuh9O87nUIoRHNUG/pjA01fZreqlq4vQ
+HUi0KaeufxGENJ7DsOlzvtedJqOtgyzojzwlGIxcDRH0kDXb8SU+9oR7C1CKbWAWZK3wi6hfSi6D
+AAKmnbbKJ63bdgPKse2mVSr/XeWecsMkb4C+eLi9OiUdVF6NLwIDAQABo4IC5TCCAuEwCQYDVR0T
+BAIwADALBgNVHQ8EBAMCA6gwEwYDVR0lBAwwCgYIKwYBBQUHAwEwHQYDVR0OBBYEFBZ4jQeN06BQ
+W4WjBalhGU3a8BAfMB8GA1UdIwQYMBaAFOtCNNCYsKuf9BtrCPfMZC7vDixFMCsGA1UdEQQkMCKC
+FmxvZ2luLXByZXByb2QuY3JsLmFlcm+CCGNybC5hZXJvMIIBVgYDVR0gBIIBTTCCAUkwCAYGZ4EM
+AQIBMIIBOwYLKwYBBAGBtTcBAgMwggEqMC4GCCsGAQUFBwIBFiJodHRwOi8vd3d3LnN0YXJ0c3Ns
+LmNvbS9wb2xpY3kucGRmMIH3BggrBgEFBQcCAjCB6jAnFiBTdGFydENvbSBDZXJ0aWZpY2F0aW9u
+IEF1dGhvcml0eTADAgEBGoG+VGhpcyBjZXJ0aWZpY2F0ZSB3YXMgaXNzdWVkIGFjY29yZGluZyB0
+byB0aGUgQ2xhc3MgMSBWYWxpZGF0aW9uIHJlcXVpcmVtZW50cyBvZiB0aGUgU3RhcnRDb20gQ0Eg
+cG9saWN5LCByZWxpYW5jZSBvbmx5IGZvciB0aGUgaW50ZW5kZWQgcHVycG9zZSBpbiBjb21wbGlh
+bmNlIG9mIHRoZSByZWx5aW5nIHBhcnR5IG9ibGlnYXRpb25zLjA1BgNVHR8ELjAsMCqgKKAmhiRo
+dHRwOi8vY3JsLnN0YXJ0c3NsLmNvbS9jcnQxLWNybC5jcmwwgY4GCCsGAQUFBwEBBIGBMH8wOQYI
+KwYBBQUHMAGGLWh0dHA6Ly9vY3NwLnN0YXJ0c3NsLmNvbS9zdWIvY2xhc3MxL3NlcnZlci9jYTBC
+BggrBgEFBQcwAoY2aHR0cDovL2FpYS5zdGFydHNzbC5jb20vY2VydHMvc3ViLmNsYXNzMS5zZXJ2
+ZXIuY2EuY3J0MCMGA1UdEgQcMBqGGGh0dHA6Ly93d3cuc3RhcnRzc2wuY29tLzANBgkqhkiG9w0B
+AQUFAAOCAQEANuxFZOtoiVyRGu7MRK/ppxUXiaVdC7JJ6g9rD0aVP2/xuDmOTcid/Pr54U4locXk
+UneuhdamasMlEzGgtl2e5T8TuWfJv7nKuMzCOtmo44mG+emvi1n+hCEgVC7gP7crbtymy7eLEJkU
+48Sa3t+iD4GPAqD2M+iPihpNFa+Mt1e+BqSXAsMQoXuK+bjtlZl05SGgByrBUrM3byfcACdV/Fab
+r3Yi59cLyd+rEwbB10QE+dqmRYTrnLc3rfeEyJkXASulbZwmX3sp8wooN/8j8fn5SE6/7m2wiFfK
+w1MObE777INrjlwNxgj0wmSz6Mrf2yGUnM3qHqboy2ZMRMqdWg==
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <ArtifactResolutionService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/ArtifactResolver/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login-preprod.crl.aero:443/opensso/IDPSloRedirect/metaAlias/idp" ResponseLocation="https://login-preprod.crl.aero:443/opensso/IDPSloRedirect/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login-preprod.crl.aero:443/opensso/IDPSloPOST/metaAlias/idp" ResponseLocation="https://login-preprod.crl.aero:443/opensso/IDPSloPOST/metaAlias/idp"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/IDPSloSoap/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login-preprod.crl.aero:443/opensso/IDPMniRedirect/metaAlias/idp" ResponseLocation="https://login-preprod.crl.aero:443/opensso/IDPMniRedirect/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login-preprod.crl.aero:443/opensso/IDPMniPOST/metaAlias/idp" ResponseLocation="https://login-preprod.crl.aero:443/opensso/IDPMniPOST/metaAlias/idp"/>
+        <ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/IDPMniSoap/metaAlias/idp"/>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login-preprod.crl.aero:443/opensso/SSORedirect/metaAlias/idp"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login-preprod.crl.aero:443/opensso/SSOPOST/metaAlias/idp"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/SSOSoap/metaAlias/idp"/>
+        <NameIDMappingService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/NIMSoap/metaAlias/idp"/>
+        <AssertionIDRequestService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://login-preprod.crl.aero:443/opensso/AIDReqSoap/IDPRole/metaAlias/idp"/>
+        <AssertionIDRequestService Binding="urn:oasis:names:tc:SAML:2.0:bindings:URI" Location="https://login-preprod.crl.aero:443/opensso/AIDReqUri/IDPRole/metaAlias/idp"/>
+    </IDPSSODescriptor>
+</EntityDescriptor>

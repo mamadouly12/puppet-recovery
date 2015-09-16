@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+	<Environment name="EPAPYRUS_CONFIGURATION_COMMONS" type="java.lang.String" 
+		value="file:///var/epapyrus/conf/ePapyrusBO/epapyrus-commons.properties" />
+	<Environment name="EPAPYRUS_CONFIGURATION_ENVSPEC" type="java.lang.String" 
+		value="file:///var/epapyrus/conf/ePapyrusBO/preprod/epapyrus-preprod.properties" />
+
+	<Resource name="jdbc/EpapyrusDataSource"
+		type="javax.sql.DataSource"
+		auth="Container"
+		username="SQEPAEPA01"
+		password="qDFG765ert"
+		driverClassName="org.gjt.mm.mysql.Driver"
+		url="jdbc:mysql://bdd-MQEPAEPA01.itcloud.lan:3306/MQEPAEPA01?autoReconnect=true"
+		validationQuery="SELECT 1"
+		validationQueryTimeout="2"
+		testOnReturn="false"
+		testOnBorrow="true"
+		maxActive="3"
+		maxIdle="1"
+		maxWait="10000"
+		/>
+
+	<Resource name="jdbc/SpiderDataSource"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="SPPEPAPYRUSVAB01"
+		password="epapyruspreprod1234!"
+		driverClassName="org.gjt.mm.mysql.Driver"
+		url="jdbc:mysql://bluebeards.corsairfly.com:3306/mppepapyrusvab01?autoReconnect=true"
+		validationQuery="SELECT 1"
+		validationQueryTimeout="2"
+		testOnReturn="false"
+		testOnBorrow="true"
+		maxActive="3"
+		maxIdle="1"
+		maxWait="10000"
+		/>
+</Context>

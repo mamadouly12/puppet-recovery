@@ -1,0 +1,80 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/kiosque<%= suffix %>.crl.aero
+	ServerName kiosque<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/kiosque<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	Redirect permanent / https://kiosque<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--kiosque<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--kiosque<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/kiosque<%= suffix %>.crl.aero
+		ServerName kiosque<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/kiosque<%= suffix %>.crl.aero>
+			Options +Includes -Indexes
+			AddOutputFilter INCLUDES .html
+			AllowOverride None
+			Order Deny,Allow
+			Allow from all
+		</Directory>
+
+		<Location />
+			Require valid-user
+			AuthType "Mellon"
+			MellonEnable "auth"
+			MellonVariable "cookie_kiosque"
+			MellonSessionLength 7200
+			MellonSecureCookie On
+			MellonUser "ucid"
+			MellonDefaultLoginPath  "/"
+			MellonEndpointPath "/sso"
+			MellonSPPrivateKeyFile /etc/apache2/sso-mellon/sites/kiosque<%= suffix %>.crl.aero/https_kiosque_<%= envlong %>.crl.aero.key
+			MellonSPCertFile /etc/apache2/sso-mellon/sites/kiosque<%= suffix %>.crl.aero/https_kiosque_<%= envlong %>.crl.aero.cert
+			MellonSPMetadataFile /etc/apache2/sso-mellon/sites/kiosque<%= suffix %>.crl.aero/https_kiosque_<%= envlong %>.crl.aero.xml
+			MellonIdPMetadataFile /etc/apache2/sso-mellon/idp-data/idp-metadata.xml
+			MellonIdPPublicKeyFile /etc/apache2/sso-mellon/idp-data/idp-cert.pem
+        </Location>
+
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--kiosque<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--kiosque<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

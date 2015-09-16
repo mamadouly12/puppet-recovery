@@ -1,0 +1,138 @@
+<VirtualHost <%= vip %>:80>
+	DocumentRoot /var/www/share<%= suffix %>.crl.aero
+	ServerName share<%= suffix %>.crl.aero
+
+	<Directory />
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	<Directory /var/www/share<%= suffix %>.crl.aero>
+		AllowOverride None
+		Order Deny,Allow
+		Deny from all
+	</Directory>
+
+	Redirect permanent / https://share<%= suffix %>.crl.aero/
+
+	LogLevel info
+	ErrorLog /var/log/apache2/error--share<%= suffix %>.crl.aero.log
+	CustomLog /var/log/apache2/access--share<%= suffix %>.crl.aero.log combined
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost <%= vip %>:443>
+		DocumentRoot /var/www/share<%= suffix %>.crl.aero
+		ServerName share<%= suffix %>.crl.aero
+	
+		<Directory />
+			AllowOverride None
+			Order Deny,Allow
+			Deny from all
+		</Directory>
+	
+		<Directory /var/www/share<%= suffix %>.crl.aero>
+			AllowOverride None
+			Order Deny,Allow
+			Allow from all
+		</Directory>
+		
+		RedirectMatch permanent ^/$ https://share<%= suffix %>.crl.aero/share
+		
+		<Proxy *>
+			Order Deny,Allow
+			Allow from all
+		</Proxy>
+		
+		ProxyRequests Off
+		ProxyPreserveHost On
+		ProxyPassInterpolateEnv On
+		
+		ProxyPass /share http://app-alfresco-share<%= suffix %>.itcloud.lan:8060/share
+		ProxyPassReverse /share http://app-alfresco-share<%= suffix %>.itcloud.lan:8060/share
+
+		ProxyPass /alive http://app-alfresco-share<%= suffix %>.itcloud.lan:8060/share/
+		ProxyPassReverse /alive http://app-alfresco-share<%= suffix %>.itcloud.lan:8060/share/
+		
+		<Location /alive>
+			AuthType Basic
+			MellonEnable "off"
+			AuthzLDAPAuthoritative on
+			AuthBasicProvider ldap
+			AuthName "Veuillez vous authentifier"
+			AuthLDAPBindDN "CN=spgdimza01,OU=serviceaccounts,OU=technical,O=manzana"
+			AuthLDAPBindPassword "DFG456fgdd"
+			AuthLDAPURL "ldap://ldp-gdimza.itcloud.lan:33389/ou=people,o=manzana?uid,cn?sub?(|(objectClass=inetOrgPerson)(objectClass=userProxyFull))"
+			Require valid-user
+		</Location>
+		
+		ProxyPass /alfresco/service http://app-alfresco.itcloud.lan:8080/alfresco/wcs
+		ProxyPassReverse /alfresco/service http://app-alfresco.itcloud.lan:8080/alfresco/wcs	
+
+		<Location /alfresco/service>
+			AuthType Basic
+			MellonEnable "off" 
+			AuthzLDAPAuthoritative on
+			AuthBasicProvider ldap
+			AuthName "Veuillez vous authentifier" 
+			AuthLDAPBindDN "cn=spgdimza01,ou=serviceaccounts,ou=technical,o=manzana"
+			AuthLDAPBindPassword "DFG456fgdd"
+			AuthLDAPURL "ldap://ldp-gdimza.itcloud.lan:33389/ou=people,o=manzana?uid,cn?sub?(|(objectClass=inetOrgPerson)(objectClass=userProxyFull))"
+			Require valid-user
+        </Location>
+
+		ProxyPass /alfresco/wcs http://app-alfresco.itcloud.lan:8080/alfresco/wcs
+        ProxyPassReverse /alfresco/wcs http://app-alfresco.itcloud.lan:8080/alfresco/wcs
+
+		<Location /alfresco/wcs>
+			AuthType Basic
+			MellonEnable "off"
+			AuthzLDAPAuthoritative on
+			AuthBasicProvider ldap
+			AuthName "Veuillez vous authentifier"
+			AuthLDAPBindDN "cn=spgdimza01,ou=serviceaccounts,ou=technical,o=manzana"
+			AuthLDAPBindPassword "DFG456fgdd"
+			AuthLDAPURL "ldap://ldp-gdimza.itcloud.lan:33389/ou=people,o=manzana?uid,cn?sub?(|(objectClass=inetOrgPerson)(objectClass=userProxyFull))"
+			Require valid-user
+        </Location>
+
+		<Location />
+			MellonEnable "info"
+			MellonVariable "cookie_epapyrus_share"
+			MellonSessionLength 10
+			MellonSecureCookie On
+			MellonUser "ucid"
+			MellonEndpointPath "/sso"
+			MellonSPPrivateKeyFile /etc/apache2/sso-mellon/sites/share<%= suffix %>.crl.aero/https_share_<%= envlong %>.crl.aero.key
+			MellonSPCertFile /etc/apache2/sso-mellon/sites/share<%= suffix %>.crl.aero/https_share_<%= envlong %>.crl.aero.cert
+			MellonSPMetadataFile /etc/apache2/sso-mellon/sites/share<%= suffix %>.crl.aero/https_share_<%= envlong %>.crl.aero.xml
+			MellonIdPMetadataFile /etc/apache2/sso-mellon/idp-data/idp-metadata.xml
+			MellonIdPPublicKeyFile /etc/apache2/sso-mellon/idp-data/idp-cert.pem
+        </Location>
+
+        RequestHeader unset X-Alfresco-Remote-User
+		RequestHeader set X-Alfresco-Remote-User %{AUTHENTICATE_cn}e env=AUTHENTICATE_cn
+        RequestHeader set X-Alfresco-Remote-User %{MELLON_ucid}e env=MELLON_ucid
+
+		LogLevel info
+		ErrorLog /var/log/apache2/error--ssl--share<%= suffix %>.crl.aero.log
+		CustomLog /var/log/apache2/access--ssl--share<%= suffix %>.crl.aero.log combined
+	
+		SSLEngine on
+		SSLCertificateFile    /etc/ssl/certs/STAR.crl.aero.crt
+        SSLCertificateChainFile /etc/ssl/certs/ComodoCertificateChain.crt
+        SSLCertificateKeyFile /etc/ssl/private/STAR.crl.aero.key
+		SSLProtocol -all +SSLv3 +TLSv1
+		SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!EXP:!MD5:!NULL
+		SSLHonorCipherOrder on
+		SSLStrictSNIVHostCheck off
+	
+		BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+	
+	</VirtualHost>
+</IfModule>

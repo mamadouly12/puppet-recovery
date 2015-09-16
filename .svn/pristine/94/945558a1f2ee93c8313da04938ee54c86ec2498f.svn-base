@@ -1,0 +1,224 @@
+$TTL 604800     ; 1 week
+$ORIGIN itcloud.lan.
+@ IN SOA ns1.itcloud.lan. admin.itcloud.lan. (
+                201306181319	; serial
+                3600     		; refresh (1 hour)
+                86400      		; retry (1 day)
+                2419200    		; expire (4 weeks)
+                604800     		; minimum (1 week)
+                )	
+
+
+;-----------
+; DNS
+;-----------
+@						IN NS	ns1.itcloud.lan.
+@						IN NS	ns2.itcloud.lan.
+ns1						IN A	172.18.6.33
+ns2						IN A	172.18.6.36
+	
+;-----------
+; Infrastructure
+;-----------
+gateway                 CNAME   SBVPINFNET01
+proxy                   CNAME   SLVPINFPXY01
+puppet                  CNAME   SLVPINFCNF01
+smtp                    A		172.18.1.30
+supervision             CNAME   SLVPINFSYS02
+time                    A		172.18.1.30
+splunk					CNAME	SLVPINFSUP01
+
+;-----------
+; Instances Tomcat
+;-----------
+; DEMO
+app-tdepaepa01          CNAME   SLVDEPAWEB01
+app-tdeparef01          CNAME   SLVDEPAWEB01
+app-tdepaact01          CNAME   SLVDEPAWEB01
+app-tdgdimza01          CNAME   SLVDEPAWEB01
+app-tdgdisso01          CNAME   SLVDEPAWEB01
+; PREPROD
+app-tqepaepa01          CNAME   SLVQEPAWEB01
+app-tqeparef01          CNAME   SLVQEPAWEB01
+app-tqepaact01          CNAME   SLVQEPAWEB01
+app-tqgdimza01          CNAME   SLVQEPAWEB01
+app-tqgdisso01          CNAME   SLVQEPAWEB01
+; PROD
+app-tpepaepa01          CNAME   SLVPEPAWEB01
+app-tpeparef01          CNAME   SLVPEPAWEB01
+app-tpepaact01          CNAME   SLVPEPAWEB01
+app-tpgdimza01          CNAME   SLVPEPAWEB01
+app-tpgdisso01          CNAME   SLVPEPAWEB01
+
+
+;-----------
+; Noms d'applications
+;-----------
+; Alfresco
+app-alfresco-demo			    CNAME   SLVDEPAWEB02
+app-alfresco-preprod		    CNAME   SLVQEPAWEB02
+app-alfresco				    CNAME   SLVPEPAWEB02
+app-alfresco-share-demo		    CNAME   SLVDEPAWEB01
+app-alfresco-share-preprod	    CNAME   SLVQEPAWEB01
+app-alfresco-share			    CNAME   SLVPEPAWEB01
+app-alfresco-records-demo	    CNAME   SLVDEPAWEB01
+app-alfresco-records-preprod	CNAME   SLVQEPAWEB01
+app-alfresco-records    	    CNAME   SLVPEPAWEB01
+app-alfresco-ebiblio-demo	    CNAME   SLVDEPAWEB01
+app-alfresco-ebiblio-preprod	CNAME   SLVQEPAWEB01
+app-alfresco-ebiblio	        CNAME   SLVPEPAWEB01
+
+; Epapyus
+app-epapyrus-demo        	CNAME   SLVDEPAWEB01
+app-epapyrus-preprod     	CNAME   SLVQEPAWEB01
+app-epapyrus             	CNAME   SLVPEPAWEB01
+
+; Manzana
+app-manzana-demo        	CNAME   SLVDEPAWEB01
+app-manzana-preprod     	CNAME   SLVQEPAWEB01
+app-manzana             	CNAME   SLVPEPAWEB01
+
+; SSO
+app-login-demo				CNAME   SLVDEPAWEB01
+app-login-preprod			CNAME   SLVQEPAWEB01
+app-login					CNAME   SLVPEPAWEB01
+
+; COLOMBUS
+app-colombus			CNAME	SLVPCLBWEB01
+app-colombus-preprod		CNAME	SLVQCLBWEB01
+app-colombus-dev           	CNAME   SLVDCLBWEB01
+;app-colombus-rect            	CNAME   SLVRCLBWEB01
+scheduler-colombus            	CNAME   SLVPCLBTJS01
+scheduler-colombus-preprod      CNAME   SLVQCLBTJS01
+scheduler-colombus-dev          CNAME   SLVDCLBTJS01
+;app-colombus-scheduler-rect    CNAME   SLVRCLBSCH01
+
+; TALEND / SPIDER
+app-spider-talendadmin			CNAME SLVPSPDTAC01
+app-spider-talendadmin-preprod		CNAME SLVQSPDTAC01
+app-spider-talendjob01			CNAME SLVPSPDTJS01
+app-spider-talendjob02                  CNAME SLVPSPDTJS02
+app-spider-talendjob01-preprod		CNAME SLVQSPDTJS01
+app-spider-talendjob01-demo		CNAME SLVDSPDTJS01
+
+;-----------
+; Bases de données
+;-----------
+; DEMO
+bdd-MDEPAEPA01          CNAME   SLVDINFBDD01
+bdd-MDEPAREF01          CNAME   SLVDINFBDD01
+bdd-MDEPAREF02          CNAME   SLVDINFBDD01
+bdd-MDEPAACT01          CNAME   SLVDINFBDD01
+bdd-MDGDIEVE01          CNAME   SLVDINFBDD01
+bdd-MDGDIMZA01          CNAME   SLVDINFBDD01
+bdd-MDGDIWFL01          CNAME   SLVDINFBDD01
+bdd-MDEPAALF01          CNAME   SLVDINFBDD01
+
+; PREPROD
+bdd-MQEPAEPA01          CNAME   SLVQINFBDD01
+bdd-MQEPAREF01          CNAME   SLVQINFBDD01
+bdd-MQEPAREF02          CNAME   SLVQINFBDD01
+bdd-MQEPAACT01          CNAME   SLVQINFBDD01
+bdd-MQGDIEVE01          CNAME   SLVQINFBDD01
+bdd-MQGDIMZA01          CNAME   SLVQINFBDD01
+bdd-MQGDIWFL01          CNAME   SLVQINFBDD01
+bdd-MQEPAALF01          CNAME   SLVQINFBDD01
+
+; PROD
+bdd-MPEPAEPA01          CNAME   SLVPINFBDD01
+bdd-MPEPAREF01          CNAME   SLVPINFBDD01
+bdd-MPEPAREF02          CNAME   SLVPINFBDD01
+bdd-MPEPAACT01          CNAME   SLVPINFBDD01
+bdd-MPGDIEVE01          CNAME   SLVPINFBDD01
+bdd-MPGDIMZA01          CNAME   SLVPINFBDD01
+bdd-MPGDIWFL01          CNAME   SLVPINFBDD01
+bdd-MPEPAALF01          CNAME   SLVPINFBDD01
+
+
+;-----------
+; Annuaires LDAP
+;-----------
+ldp-epapyrus-demo       A		172.18.3.35
+ldp-gdimza-demo         A   	172.18.3.35
+ldp-gdimza-preprod      CNAME   SWVQGDILDP01.corsairfly.com.
+ldp-gdimza              CNAME   SWVPGDILDP01.corsairfly.com.
+
+
+;-----------
+; Serveurs
+;-----------
+; INFRA
+SLVPINFCNF01            A       172.18.6.35
+SLVPINFPXY01            A       10.178.1.33
+SLVPINFSYS01            A       172.18.6.36
+SLVPINFSYS02            A       172.18.6.34
+SLVPINFSYS03            A       172.18.6.33
+SLVPEPAUDD01            A       172.18.6.37
+SLVPINFSUP01            A       172.18.6.38
+SLVPINFEML01		A	172.18.1.30
+SLVPCLBUDD01            A       172.18.6.39
+
+; DEMO
+SLVDEPAWEB01            A       172.18.3.33
+SLVDEPAWEB02            A       172.18.3.37
+SLVDEPAWEB03            A       172.18.3.38
+SLVDINFBDD01            A       172.18.3.34
+SLVDB2CWEB01            A       172.18.3.20
+
+SLVDCLBWEB01		A	10.160.252.143
+SLVDCLBBDD01		A	10.160.252.144
+SLVDCLBTJS01		A	10.160.252.138
+
+SLVDSPDTJS01		A	172.18.3.40
+
+; PREPROD
+SLVQEPAWEB01            A       172.18.4.33
+SLVQEPAWEB02            A       172.18.4.37
+SLVQEPAWEB03            A       172.18.4.38
+SLVQINFBDD01            A       172.18.4.34
+SLVQINFRPX01            A       172.18.1.33
+SLVQB2CWEB01            A       172.18.4.20
+SLVQINTBLG01            A       172.18.4.50
+
+SLVQCLBTJS01		A	172.18.4.40
+SLVQCLBBDD01		A	172.18.4.42
+SLVQCLBWEB01		A	172.18.4.43
+
+SLVQCLBTJS02		A	172.18.4.41
+SLVQCLBBDD02		A	172.18.4.44
+SLVQCLBWEB02		A	172.18.4.45
+
+SLVQSPDTAC01		A	10.160.252.139
+SLVQSPDTJS01		A	10.160.252.140
+
+; PROD
+SLVPEPAWEB01            A       172.18.5.33
+SLVPEPAWEB02            A       172.18.5.37
+SLVPEPAWEB03            A       172.18.5.38
+SLVPINFBDD01            A       172.18.5.34
+SLVPINFRPX01            A       172.18.1.34
+SLVPB2CWEB01            A       172.18.1.20
+SLVPB2CWEB02            A       172.18.1.21
+SLVPB2CNFS01            A       172.18.1.22
+SLVPB2CBDD01            A       172.18.5.20
+SLVPB2CBDD02            A       172.18.5.21
+SLVPB2CRPX01            A       172.18.1.41
+SLVPB2CRPX02            A       172.18.1.42
+SLVPINFRPX03		A	172.18.1.35
+SLVPINTBLG01		A	172.18.5.43
+
+SLVPCLBTAC01		A	10.160.252.137
+SLVPCLBWEB01		A	10.160.252.147
+SLVPCLBBDD01		A	10.160.252.148
+SLVPCLBTJS01		A	10.160.252.142
+
+SLVPSPDTAC01            A       10.160.252.123
+SLVPSPDTJS01            A       10.160.252.122	
+SLVPSPDTJS02            A       10.160.252.136
+
+;-----------
+; Load Balancers
+;-----------
+; PROD
+RDVPB2CLBA01            A       172.18.1.5
+RDVPB2CLBA02            A       172.18.7.4
